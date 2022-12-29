@@ -1,0 +1,6 @@
+[06-Oct-2022 15:00:19 UTC] PHP Fatal error:  Cannot use [] for reading in /home/purplep2/public_html/betslipswitch.com/storage/framework/views/745da2323344ff18f8b3ecd1a617066af5d2db33.php on line 10
+[06-Oct-2022 15:04:01 UTC] PHP Fatal error:  Cannot use [] for reading in /home/purplep2/public_html/betslipswitch.com/storage/framework/views/745da2323344ff18f8b3ecd1a617066af5d2db33.php on line 10
+[06-Oct-2022 15:05:24 UTC] PHP Fatal error:  Cannot use [] for reading in /home/purplep2/public_html/betslipswitch.com/storage/framework/views/745da2323344ff18f8b3ecd1a617066af5d2db33.php on line 10
+[17-Nov-2022 09:03:01 UTC] PHP Fatal error:  Cannot redeclare App\Http\Controllers\PassportController::email_verification() in /home/rehksfvj/betslipswitch.com/app/Http/Controllers/PassportController.php on line 289
+[17-Nov-2022 09:03:10 UTC] PHP Fatal error:  Cannot redeclare App\Http\Controllers\PassportController::email_verification() in /home/rehksfvj/betslipswitch.com/app/Http/Controllers/PassportController.php on line 289
+[17-Nov-2022 09:03:16 UTC] PHP Fatal error:  Cannot redeclare App\Http\Controllers\PassportController::email_verification() in /home/rehksfvj/betslipswitch.com/app/Http/Controllers/PassportController.php on line 289
