@@ -9,6 +9,7 @@
 
 <head>
 	<title>Betslipswitch-Contact-us</title>
+	<link rel="shortcut icon" href="/images/ball.png">
 	<meta charset="utf-8">
 	
 	<meta name="description" content="">
@@ -43,7 +44,7 @@
                     <nav style="margin: 0px; background: rgb(7,4,41,0.6);" class="" data-uk-sticky="">
                         <div class="uk-container uk-container-center">
                             <a class="" href="/">
-                                <img src="images/bet_logo.png" style="width: 150px; height:auto;margin-bottom:0px; margin-top: -34px" alt="logo" title="logo"> <span></span>
+                                <img src="images/bet_logo.png" style="width: 150px; height:auto;margin-bottom:0px; margin-top:0px" alt="logo" title="logo"> <span></span>
                             </a>
     
                             <ul class="uk-navbar-nav uk-hidden-small">

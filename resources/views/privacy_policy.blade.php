@@ -9,6 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>BetSlipSwitch</title>
+    <link rel="shortcut icon" href="/images/ball.png">
     <link href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
     <link href="images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
     <link href="css/akslider.css" rel="stylesheet" type="text/css" />
@@ -71,7 +72,7 @@
                 <nav style="margin: 0px; background: rgb(7,4,41,0.6);" class="" data-uk-sticky="">
                     <div class="uk-container uk-container-center">
                         <a class="" href="/">
-                            <img src="images/bet_logo.png" style="width: 150px; height:auto;margin-bottom:0px; margin-top: -34px" alt="logo" title="logo"> <span></span>
+                            <img src="images/bet_logo.png" style="width: 150px; height:auto;margin-bottom:0px; margin-top: 0px" alt="logo" title="logo"> <span></span>
                         </a>
 
                         <ul class="uk-navbar-nav uk-hidden-small">

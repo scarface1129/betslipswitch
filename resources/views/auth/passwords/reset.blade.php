@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BetSlipSwitch</title>
+    <link rel="shortcut icon" href="/images/ball.png">
     <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../../css/fontawesome-all.min.css">
     <link rel="stylesheet" type="text/css" href="../../css/iofrm-style.css">

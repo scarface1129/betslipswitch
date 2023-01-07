@@ -9,6 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>BetSlipSwitch</title>
+    <link rel="shortcut icon" href="/images/ball.png">
     <link href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
     <link href="images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
     <link href="css/akslider.css" rel="stylesheet" type="text/css" />
@@ -83,7 +84,7 @@
                 <nav style="margin: 0px;" class="" data-uk-sticky="">
                     <div class="uk-container uk-container-center">
                         <a class="" href="/">
-                            <img src="images/bet_logo.png" style="width: 150px; height:auto;margin-bottom:0px;margin-top:-50px;" alt="logo" title="logo"> <span></span>
+                            <img src="images/bet_logo.png" style="width: 150px; height:auto;margin-bottom:0px;margin-top:0px;" alt="logo" title="logo"> <span></span>
                         </a>
 
                         <ul class="uk-navbar-nav uk-hidden-small">
@@ -176,7 +177,7 @@
                                                                         <p style="text-align: left;margin-bottom: 20px;">Bet converter app for converting bookings in seconds. with our community for your day to day betting support.</p>
                                                                         <div class="banner-buttons">
                                                                             <div class="banner-button">
-                                                                                <a href="#" id="myBtn"><img src="images/1.png" alt="" /></a>
+                                                                                <a href="https://apps.apple.com/app/betslipswitch/id1661506197" id=""><img src="images/1.png" alt="" /></a>
                                                                             </div>
                                                                             <div class="banner-button green-button">
                                                                                 <a href="https://play.google.com/store/apps/details?id=com.betslipswitch.betslipswitch"><img src="images/2.png" alt="" /></a>

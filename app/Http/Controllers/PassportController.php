@@ -31,7 +31,7 @@ class PassportController extends Controller
         $validate_data = [
             'name' => 'required|string|min:4',
             'email' => 'required|email',
-            'phone' => ['required', 'numeric', 'min:10'],
+            'phone' => 'nullable|numeric|min:10',
             'password' => 'required|min:8',
         ];
 
@@ -55,7 +55,7 @@ class PassportController extends Controller
                 'message' => 'Email already exists, please login',
             ]);
         }
-        if($user_phone){
+        if($user_phone && $user_phone['phone'] != null){
                 return response()->json([
                 'success' => false,
                 'message' => 'Phone number already exists, please login',
@@ -220,6 +220,26 @@ class PassportController extends Controller
                 'success' => false,
                 'message' => 'User does not exist',
                 
+            ]);
+        }
+    }
+    
+    
+    public function delete(Request $request)
+    {
+        $input = $request->only(['email']);
+        $email = $input['email'];
+        $user = User::where('email', $email)->first() ?? false;
+        if ($user) {
+            $user->delete();
+            return response()->json([
+                'success' => true,
+                'message' => 'User deleted successfully',
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'User does not exist',
             ]);
         }
     }
@@ -474,4 +494,8 @@ class PassportController extends Controller
         }
 
     }
+    
+    
+    
+    
 }

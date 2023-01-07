@@ -406,6 +406,9 @@ section,
 summary {
   display: block;
 }
+nav{
+    background: rgba(7, 4, 41, 0.6);
+}
 /*
  * Normalize vertical alignment of `progress` in Chrome, Firefox, and Opera.
  */

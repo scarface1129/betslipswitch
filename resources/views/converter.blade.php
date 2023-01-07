@@ -18,7 +18,7 @@
 
 
     <title>BetSlipSwitch</title>
-
+<link rel="shortcut icon" href="/images/ball.png">
 
 
     <!-- Loading Bootstrap -->
@@ -162,7 +162,7 @@
                     <!--begin logo -->
 
                     <a class="navbar-brand" href="/">
-                        <img src="images/bet_logo.png" style="width: 123px;height: auto; margin-bottom: -17px;margin-top: -40px;" alt="logo" title="logo"> <span></span>
+                        <img src="images/bet_logo.png" style="width: 123px;height: auto; margin-bottom: -17px;margin-top: 0px;" alt="logo" title="logo"> <span></span>
                     </a>
 
                     <!--end logo -->
@@ -407,7 +407,7 @@
                             <p>Get our Mobile App on both Google play and Apple Store to access more of our features. Click below to continue...</p>						
                             <ul class="utf-download-text1" >
                                 <li >
-                                    <a href="#" data-toggle="modal" data-target="#ios" style='cursor: pointer;' class="top" title="App Store">
+                                    <a href="https://apps.apple.com/app/betslipswitch/id1661506197" data-toggle="modal" data-target="#ios" style='cursor: pointer;' class="top" title="App Store">
                                         <img    src="images/sports/apple_icon.png" alt="">
                                         <span>Apple Store</span>
                                         <p>Available Now</p>

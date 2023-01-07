@@ -38,7 +38,8 @@ Route::middleware('auth:api')->group(function () {
     Route::post('logout', [PassportController::class, 'logout']);
     Route::post('update', [PassportController::class, 'update']);
     Route::post('change_password', [PassportController::class, 'change_password']);
-   
+    Route::post('delete_user', [PassportController::class, 'delete']);
+
     
 
 
