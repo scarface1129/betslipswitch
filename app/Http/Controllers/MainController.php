@@ -106,16 +106,18 @@ class MainController extends Controller
         $Ip = $_COOKIE['Ip'] ?? '';
         $times = $_COOKIE['times'] ?? '0';
         
-        if(!Auth::check() && $Ip){
+        // if(!Auth::check() && $Ip){
+        if(!Auth::check()){
             return redirect('/login');
-        }else{
-            if($times >= 1){
-                setcookie('Ip', $clientIP, time() + (86400 * 365), "/");
-            }else{
-                $times = $times + 1;
-                setcookie('times', $times, time() + (86400 * 365), "/");
-            }  
         }
+        // else{
+        //     if($times >= 1){
+        //         setcookie('Ip', $clientIP, time() + (86400 * 365), "/");
+        //     }else{
+        //         $times = $times + 1;
+        //         setcookie('times', $times, time() + (86400 * 365), "/");
+        //     }  
+        // }
         if(count($data) > 0){
             $mainData = json_decode($data[0]['plateform'],true);
             $bookies = $mainData['data']['bookies'];
