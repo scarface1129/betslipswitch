@@ -102,11 +102,10 @@ class MainController extends Controller
     
     public function converter(Request $request) {
         $data = Bookies::all();
-        $clientIP = request()->ip();
-        $Ip = $_COOKIE['Ip'] ?? '';
-        $times = $_COOKIE['times'] ?? '0';
+        // $clientIP = request()->ip();
+        // $Ip = $_COOKIE['Ip'] ?? '';
+        // $times = $_COOKIE['times'] ?? '0';
         
-        // if(!Auth::check() && $Ip){
         if(!Auth::check()){
             return redirect('/login');
         }

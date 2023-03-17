@@ -24,14 +24,19 @@ use App\Http\Controllers\Auth\RegisterController;
 Route::get('contact-us', function () {
     return view('contact');
 })->name('contact-us');
-
+Route::get('maintainance', function () {
+    return view('maintainance');
+})->name('maintainace');
 Route::get('privacy_policy', function () {
     return view('privacy_policy');
 })->name('privacy_policy');
 Route::get('faq', function () {
     return view('faq');
 })->name('faq');
-Route::get('/', [MainController::class,'index'])->name('index');
+// Route::get('/', [MainController::class,'index'])->name('index');
+Route::get('/', function () {
+    return view('maintainance');
+})->name('maintainance');
 
 Route::get('Unverified', function () {
     return view('auth.unverified');

@@ -192,7 +192,7 @@
                                                         {{-- </div> --}}
                                                     </div>
                                                     <div style="text-align: left; margin-left: 20px;" class="va-promo-text uk-width-6-10 uk-push-4-10">
-                                                        <h3>Bet code<span> Convertion</span></h3>
+                                                        <h3>Bet code<span> Conversion</span></h3>
                                                         <div  class="promo-sub">Convert any <span>Booking code</span> to your desired Bookie</div>
                                                         <a href="{{ route('converter')}}" class="read-more">Get Started Now</a>
                                                     </div>
