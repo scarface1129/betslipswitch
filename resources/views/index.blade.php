@@ -25,7 +25,7 @@
       #bookies{
                 background: #070429;margin:5px;border-radius: 5px; height:75px;width: 10%; float: left; padding: 5px;
             }
-            .msports{
+            .msports {
                 width: 65%; margin: 0px 0px 0px 20px;
             }
             @media (max-width: 870px) {
@@ -94,6 +94,8 @@
                              <li data-uk-dropdown="{'preventflip':'y'}" aria-haspopup="true" aria-expanded="false"><a href="{{route('contact-us')}}">Contact-us</a></li>
                             <li data-uk-dropdown="{'preventflip':'y'}" aria-haspopup="true" aria-expanded="false"><a href="{{route('privacy_policy')}}">Privacy & Policy</a></li>
                             <li data-uk-dropdown="{'preventflip':'y'}" aria-haspopup="true" aria-expanded="false"><a href="{{route('faq')}}">FAQ</a></li>
+                            <li data-uk-dropdown="{'preventflip':'y'}" aria-haspopup="true" aria-expanded="false"><a href="{{route('how_it_works')}}">How-it-works</a></li>
+
                             @if(Auth::user())
                             <li data-uk-dropdown="{'preventflip':'y'}" aria-haspopup="true" aria-expanded="false"><a href="{{ route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
                             @else

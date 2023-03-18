@@ -1,22 +1,14 @@
 <!DOCTYPE html>
+<?php
 
+// die();
+?>
 <html lang="zxx">
-
-
-
-
 <head>
-
     <meta charset="utf-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <meta name="keywords" content="">
-
     <meta name="description" content="">
-
-
-
     <title>BetSlipSwitch</title>
 <link rel="shortcut icon" href="/images/ball.png">
 
@@ -33,6 +25,7 @@
 
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/master.css" rel="stylesheet">
+    {{-- <link href="css/widgets.css" rel="stylesheet"> --}}
 
     <link rel="stylesheet" href="css/pe-icon-7-stroke.css">
    
@@ -191,6 +184,8 @@
 
                         <ul class="navbar-nav ml-auto">
                             @auth
+                            <li class="mt-3"><a href="{{route('conversions')}}">History</a></li>
+
                             @if(Auth::user()->is_admin)
                             <li>
                                 <button class="btn btn-primary p-2 mt-4" onclick="event.preventDefault(); document.getElementById('bookies').submit();">
@@ -253,26 +248,10 @@
         <div class="divss"></div>
 
         <div class="home-section-overlay"></div>
-
-
-
-        <!--begin container -->
-
         <div class="container">
 
-
-
-            <!--begin row -->
-
             <div class="row">
-
-
-
-                <!--begin col-md-5-->
-
                 <div class="col-md-6 padding-top-80">
-
-
 
                     <h1>Welcome To <span style="color:#fff;">BetSlip</span><span style="color: #ff2400;">Switch</span></h1>
                     <p class="hero-text" >What We Offer</p>
@@ -285,27 +264,8 @@
                     </ul>
                     <!--end home-benefits -->
                 </div>
-
-                <!--end col-md-5-->
-
-
-
-                <!--begin col-md-2-->
-
                 <div class="col-md-1"></div>
-
-                <!--end col-md-2-->
-
-
-
-                <!--begin col-md-5-->
-
                 <div class="col-md-5 margin-top-20">
-
-
-
-                    <!--begin register-form-wrapper-->
-
                     <div class="register-form-wrapper wow bounceIn" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: bounceIn;">
 
 
@@ -367,35 +327,10 @@
                         </div>
                             
                         @endif
-                            
-                        <!--end form-->
-
-
-
                     </div>
-
-                    <!--end register-form-wrapper-->
-
-
-
                 </div>
-
-                <!--end col-md-5-->
-
-
-
             </div>
-
-            <!--end row -->
-
-
-
         </div>
-
-        <!--end container -->
-
-        
-
     </section>
     <section id="contactus" class="section gray-bg">
         <div class="utf-photo-section-block">
@@ -512,7 +447,7 @@
 
     <!--begin pricing section -->
 
-    {{-- <section id="pricing">
+    {{-- <section id="pricing" class="section gray-bg">
         <div class="section-bg-overlay"></div>
         <!--begin container -->
 
@@ -652,7 +587,27 @@
 
     <!--end pricing section -->
 
+    <section id="pricing" class="my-5">
 
+        <div id="wg-api-football-games"
+        data-host="api-football-v1.p.rapidapi.com"
+        data-key= {{$api_key}}
+        data-date=""
+        data-league="2"
+        data-season="2022"
+        data-theme="dark"
+        data-refresh="15"
+        data-show-toolbar="true"
+        data-show-errors="true"
+        data-show-logos="true"
+        data-modal-game="true"
+        data-modal-standings="true"
+        data-modal-show-logos="true">
+        </div>
+   
+   
+
+    </section>
 
 
     <div class="footer">
@@ -1047,7 +1002,10 @@ s0.parentNode.insertBefore(s1,s0);
   setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 }
 </script>
-
+{{-- <script
+       type="module"
+       src="https://widgets.api-sports.io/2.0.3/widgets.js">
+</script> --}}
 </body>
 
 

@@ -5,14 +5,14 @@ namespace App\Http\Controllers;
 use Throwable;
 use App\Models\User;
 use App\Models\Bookies;
-use App\Models\conversion;
+// use App\Models\conversion;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
-use Conversion as GlobalConversion;
+// use Conversion as GlobalConversion;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Validator;
 use SebastianBergmann\Comparator\Exception;
@@ -21,9 +21,12 @@ class MainController extends Controller
 {
     
    public function index(Request $request) {
-    $clientIP = request()->ip();   
+    // $clientIP = request()->ip();   
         return view('index');
     }
+    public function conversions() {
+            return view('conversions');
+        }
        public function UpdateProfile(Request $request, $id)
     
     {
@@ -102,6 +105,7 @@ class MainController extends Controller
     
     public function converter(Request $request) {
         $data = Bookies::all();
+        $api_key='6f9a91afb3msh43eb90b3e4fc735p181969jsn3ba69f5720a8';
         // $clientIP = request()->ip();
         // $Ip = $_COOKIE['Ip'] ?? '';
         // $times = $_COOKIE['times'] ?? '0';
@@ -120,7 +124,7 @@ class MainController extends Controller
         if(count($data) > 0){
             $mainData = json_decode($data[0]['plateform'],true);
             $bookies = $mainData['data']['bookies'];
-            return view('converter',['bookie'=>$bookies] );
+            return view('converter',['bookie'=>$bookies,'api_key'=>$api_key] );
         }else{
             return view('converter', ['bookie'=>''] );
         } 
@@ -169,18 +173,31 @@ class MainController extends Controller
             'code_destination'=>$destination_code,
             'bookie_home'=>$home->bookie,
             'bookie_destination'=>$destination->bookie,
-            'games'=>$games
+            'games'=>$games,
+            
         
         ];
+        $this->create_conversion(true,$from,$to,date('Y-m-d'));
         return redirect('converter')->with($info);
         }catch (Throwable $e) {
             report($e);
-     
+            $this->create_conversion(false,$from,$to,date('Y-m-d'));
+            
             return redirect('converter')->with('no_message','Your booking code cound not be converted');
         }
         }
     }
-
+    public function create_conversion($status,$from,$to,$date){
+        // $comment = new comment();
+        // $comment->blogs_id = request('blogs_id');
+        // $comment->Name = request('Name');
+        // $comment->comment = request('comment');
+        // if($comment->comment){
+        //     $comment->save();
+        //     return redirect("/blog/$comment->blogs_id")->with('mssg', 'Blog Posted Successfully');
+        // }
+       
+    }
 
     public function store_bookies(Request $request)
     {

@@ -24,6 +24,9 @@ use App\Http\Controllers\Auth\RegisterController;
 Route::get('contact-us', function () {
     return view('contact');
 })->name('contact-us');
+Route::get('how-it-works', function () {
+    return view('how_it_works');
+})->name('how_it_works');
 Route::get('maintainance', function () {
     return view('maintainance');
 })->name('maintainace');
@@ -33,16 +36,17 @@ Route::get('privacy_policy', function () {
 Route::get('faq', function () {
     return view('faq');
 })->name('faq');
-// Route::get('/', [MainController::class,'index'])->name('index');
-Route::get('/', function () {
-    return view('maintainance');
-})->name('maintainance');
+Route::get('/', [MainController::class,'index'])->name('index');
+// Route::get('/', function () {
+//     return view('maintainance');
+// })->name('maintainance');
 
 Route::get('Unverified', function () {
     return view('auth.unverified');
 });
 
 Route::get('/converter', [MainController::class, 'converter'])->name('converter');
+Route::get('/conversions', [MainController::class, 'conversions'])->name('conversions');
 
 Auth::routes();
 
