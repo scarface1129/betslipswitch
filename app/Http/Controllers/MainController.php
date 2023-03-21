@@ -8,11 +8,12 @@ use App\Models\Bookies;
 // use App\Models\conversion;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use App\Models\ConversionHistory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Mail;
 // use Conversion as GlobalConversion;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Validator;
 use SebastianBergmann\Comparator\Exception;
@@ -25,7 +26,11 @@ class MainController extends Controller
         return view('index');
     }
     public function conversions() {
-            return view('conversions');
+        $conversions = ConversionHistory::where('user_id', Auth::user()->user_id)->get();
+        if(!Auth::check()){
+            return redirect('/login');
+        }
+            return view('conversions',['conversions'=>$conversions]);
         }
        public function UpdateProfile(Request $request, $id)
     
@@ -138,6 +143,7 @@ class MainController extends Controller
         $data = $response; 
         $data = (json_decode($data));
         if($data == null){
+            $this->create_conversion('false',$from,$to,date('Y-m-d H:i:s'),$booking_code);
             return redirect('converter')->with('no_message','Your booking code cound not be converted');
         }
         else{
@@ -177,25 +183,32 @@ class MainController extends Controller
             
         
         ];
-        $this->create_conversion(true,$from,$to,date('Y-m-d'));
+        if($conversion->destination_code){
+            $this->create_conversion('true',$from,$to,date('Y-m-d H:i:s'),$booking_code);
+        }else{
+            $this->create_conversion('false',$from,$to,date('Y-m-d H:i:s'),$booking_code);
+        }
         return redirect('converter')->with($info);
         }catch (Throwable $e) {
             report($e);
-            $this->create_conversion(false,$from,$to,date('Y-m-d'));
+            $this->create_conversion('false',$from,$to,date('Y-m-d H:i:s'),$booking_code);
             
             return redirect('converter')->with('no_message','Your booking code cound not be converted');
         }
         }
     }
-    public function create_conversion($status,$from,$to,$date){
-        // $comment = new comment();
-        // $comment->blogs_id = request('blogs_id');
-        // $comment->Name = request('Name');
-        // $comment->comment = request('comment');
-        // if($comment->comment){
-        //     $comment->save();
-        //     return redirect("/blog/$comment->blogs_id")->with('mssg', 'Blog Posted Successfully');
-        // }
+    public function create_conversion($status,$from,$to,$date,$booking_code){
+        $conversion = new ConversionHistory();
+        $conversion->user_id = Auth::user()->user_id;
+        $conversion->converted_from = $from;
+        $conversion->converted_to = $to;
+        $conversion->code = $booking_code;
+        $conversion->created_at = $date;
+        $conversion->updated_at = $date;
+        $conversion->status = $status;
+        if($conversion->user_id){
+            $conversion->save();
+        }
        
     }
 

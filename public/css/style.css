@@ -2280,7 +2280,7 @@ blockquote {
 
 #pricing{
 
-    background: url(../images/bg001.jpg);
+    background: url(../images/sports/background2.jpg);
 
     background-position: top center;
 
@@ -2338,10 +2338,10 @@ blockquote {
 
 .price-box.grey-price-box{
 
-	background-color: #189D60
+	background-color: #070429
 ;
 
-	border:1px solid #189D60
+	border:1px solid #070429
 ;
 
 }
@@ -2378,9 +2378,9 @@ ul.pricing-list li.price-title{
 
 	font-family: 'Roboto', sans-serif;
 
-	font-size: 20px;
+	font-size: 15px;
 
-	line-height: 24px;
+	line-height: 30px;
 
 	font-weight: 500;
 
@@ -2396,7 +2396,7 @@ ul.pricing-list li.price-value{
 
 	font-family: 'Roboto', sans-serif;
 
-	font-size: 40px;
+	font-size: 27px;
 
 	line-height: 70px;
 

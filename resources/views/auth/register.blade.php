@@ -10,6 +10,8 @@
     <link rel="stylesheet" type="text/css" href="css/fontawesome-all.min.css">
     <link rel="stylesheet" type="text/css" href="css/iofrm-style.css">
     <link rel="stylesheet" type="text/css" href="css/iofrm-theme2.css">
+    {!! RecaptchaV3::initJs() !!}
+
 </head>
 <body>
     <div class="form-body">
@@ -83,6 +85,7 @@
                             {{-- <input class="form-control" id="password-confirm" type="password" name="password_confirmation" placeholder="Confirm Password" required autocomplete="new-password"> --}}
                               
                             <div class="form-button">
+                                {!! RecaptchaV3::field('register') !!}
                                 <button id="submit" type="submit" class="ibtn">Register</button>
                             </div>
                         </form>

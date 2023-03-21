@@ -275,42 +275,22 @@
 
                 <!--begin row -->
                 <div class="row">
+                    @foreach($conversions as $conversion)
                     <div class="col-md-3 col-sm-6">
                         <div class="process" style="text-align: left;">
-                            <p style='line-height:10px;'>Code From:</p>
-                            <p style='line-height:10px;'>Code To:</p>
-                            <p style='line-height:10px;'>Code Converted:</p>
-                            <p style='line-height:10px;'>Status:</p>
-                            <p style='line-height:10px;'>Date:</p>
+                            <p style='line-height:10px; font-size: 16px;'>Code From: {{$conversion->converted_from}}</p>
+                            <p style='line-height:10px; font-size: 16px;'>Code To: {{$conversion->converted_to}}</p>
+                            <p style='line-height:10px; font-size: 16px;'>Code: {{$conversion->code}}</p>
+                            @if($conversion->status == 'true')
+                            <p style='line-height:10px; font-size: 16px; color: blue'>Status: Success</p>
+                            @else
+                            <p style='line-height:10px; font-size: 16px; color: red'>Status: Failed</p>
+                            @endif
+                            <p style='line-height:10px; font-size: 16px;'>Date: {{$conversion->created_at->format('d/m/Y')}}</p>
                         </div>
                     </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="process" style="text-align: left;">
-                            <p style='line-height:10px;'>Code From:</p>
-                            <p style='line-height:10px;'>Code To:</p>
-                            <p style='line-height:10px;'>Code Converted:</p>
-                            <p style='line-height:10px;'>Status:</p>
-                            <p style='line-height:10px;'>Date:</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="process" style="text-align: left;">
-                            <p style='line-height:10px;'>Code From:</p>
-                            <p style='line-height:10px;'>Code To:</p>
-                            <p style='line-height:10px;'>Code Converted:</p>
-                            <p style='line-height:10px;'>Status:</p>
-                            <p style='line-height:10px;'>Date:</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="process" style="text-align: left;">
-                            <p style='line-height:10px;'>Code From:</p>
-                            <p style='line-height:10px;'>Code To:</p>
-                            <p style='line-height:10px;'>Code Converted:</p>
-                            <p style='line-height:10px;'>Status:</p>
-                            <p style='line-height:10px;'>Date:</p>
-                        </div>
-                    </div>
+                    @endforeach
+                    
                 </div>
                 <!--end row -->
                 

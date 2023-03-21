@@ -3,12 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
+
     <title>BetSlipSwitch</title>
     <link rel="shortcut icon" href="/images/ball.png">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/fontawesome-all.min.css">
     <link rel="stylesheet" type="text/css" href="css/iofrm-style.css">
     <link rel="stylesheet" type="text/css" href="css/iofrm-theme2.css">
+    {{-- <script>
+        function callbackThen(response){
+            response.json().then(function(data){
+                console.log(data);
+                if(data.success && data.score > 0.5){
+                    console.log('Valid source' + data.score)
+                }else{
+
+                }
+            })
+        }
+        function callbackCatch(error){
+            console.log('Error' + error)
+        }
+    </script>
+    {!! htmlScriptTagJsApi([
+        "callback_then"=>"callbackThen",
+        "callback_catch"=>"callbackCatch",
+    ]) !!} --}}
+
+    {!! RecaptchaV3::initJs() !!}
 </head>
 <body>
     <div class="form-body">
@@ -62,6 +85,7 @@
                                     </span>
                                 @enderror
                             <div class="form-button">
+                                {!! RecaptchaV3::field('login') !!}
                                 <button id="submit" type="submit" class="ibtn">Login</button> <a href="{{ route('password.request') }}">Forget password?</a>
                             </div>
                         </form>

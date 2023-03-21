@@ -14,6 +14,8 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Validator;
 use SebastianBergmann\Comparator\Exception;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Lunaweb\RecaptchaV3\Facades\RecaptchaV3;
+
 
 
 class RegisterController extends Controller
@@ -56,11 +58,13 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        // $score = RecaptchaV3::verify($data['g-recaptcha-response'],'register');
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'phone' => ['nullable', 'numeric', 'min:10','unique:users'],
             'password' => ['required', 'string', 'min:8'],
+            'g-recaptcha-response' => 'required|recaptchav3:register,0.5',
         ]);
     }
 

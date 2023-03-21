@@ -105,83 +105,34 @@
   opacity: 1;
 }
     </style>
-
     <!-- Fonts -->
-
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i&amp;display=swap" rel="stylesheet">
-
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500&amp;display=swap" rel="stylesheet">
-
-
-
     <!-- Font Favicon -->
-
     <link rel="shortcut icon" href="images/favicon.ico">
-
-
-
 </head>
-
-
-
 <body>
-
-
-
     <!--begin header -->
-
     <header class="header">
-
-
-
         <!--begin navbar-fixed-top -->
-
         <nav class="navbar navbar-default navbar-fixed-top">
-
-
-
             <!--begin container -->
-
             <div class="container">
-
-
-
                 <!--begin navbar -->
-
                 <nav class="navbar navbar-expand-lg">
-
-
-
                     <!--begin logo -->
-
                     <a class="navbar-brand" href="/">
                         <img src="images/bet_logo.png" style="width: 123px;height: auto; margin-bottom: -17px;margin-top: 0px;" alt="logo" title="logo"> <span></span>
                     </a>
-
                     <!--end logo -->
-
-
-
                     <!--begin navbar-toggler -->
-
                     <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-
                         <span class="navbar-toggler-icon"></i></span>
-
                     </button>
-
                     <!--end navbar-toggler -->
-
-
-
                     <!--begin navbar-collapse -->
-
                     <div class="navbar-collapse collapse" id="navbarCollapse">
-
-
-
                         <!--begin navbar-nav -->
-
                         <ul class="navbar-nav ml-auto">
                             @auth
                             <li class="mt-3"><a href="{{route('conversions')}}">History</a></li>
@@ -447,147 +398,65 @@
 
     <!--begin pricing section -->
 
-    {{-- <section id="pricing" class="section gray-bg">
+    <section id="pricing" class="section gray-bg">
         <div class="section-bg-overlay"></div>
         <!--begin container -->
 
         <div class="container">
-
-
-
-            <!--begin row -->
-
             <div class="row">
-
-
-
-                <!--begin col-md-12 -->
-
                 <div class="col-md-12 text-center padding-bottom-40">
-
-
-
                     <h2 class="section-title white-text">Pricing made for everyone</h2>
-
-
-
                     <p class="section-subtitle white-text">All pricing packages are backed up by a 30-day money back guarantee.</p>
-
-
-
                 </div>
-
-                <!--end col-md-12 -->
-
-
-
             </div>
-
-            <!--end row -->
-
-
-
         </div>
-
-        <!--end container -->
-
-
-
-        <!--begin pricing-wrapper -->
-
         <div class="pricing-wrapper">
-
-
-
-            <!--begin container -->
-
             <div class="container">
-
-
-
-                <!--begin row -->
-
                 <div class="row">
-
-
-
-                    <!--begin col-md-4-->
-
-                    <div class="col-md-4">
+                    <div class="col-md-4 col-sm-12">
                         <div class="price-box">
                             <ul class="pricing-list">
-                                <li class="price-title">10 Units</li>
-                                <li class="price-value">10000 NGN</li>
+                                <li class="price-value">Free</li>
+                                <li class="price-title">- 3 free conversions</li>
+                                <li class="price-title">- Access to free communities</li>
+                                <li class="price-title">- Limited access to sports API</li>
+                                <li class="price-title">- Inability to create communities</li>
+                                <li class="price-value">Active</li>
                                 <li class="price-tag-line"><a href="#">Purchase</a></li>
                             </ul>
                         </div>
                     </div>
-
-                    <!--end col-md-4 -->
-
-
-
-                    <!--begin col-md-4-->
-
-                    <div class="col-md-4">
+                    <div class="col-md-4 col-sm-12">
                         <div class="price-box grey-price-box">
-                        <ul class="pricing-list">
-                                <li class="price-title">25 Units</li>
-                                <li class="price-value">20000 NGN</li>
+                            <ul class="pricing-list">
+                                <li class="price-value">Pro</li>
+                                <li class="price-title">- 10 free conversions per month</li>
+                                <li class="price-title">- Access to free communities</li>
+                                <li class="price-title">- Unlimited access to sports API</li>
+                                <li class="price-title">- Ability to create communities</li>
+                                <li class="price-value">Comming Soon</li>
                                 <li class="price-tag-line"><a href="#">Purchase</a></li>
                             </ul>
                         </div>
-
-
-
                     </div>
-
-                    <!--end col-md-4 -->
-
-
-
-                    <!--begin col-md-4-->
-
-                    <div class="col-md-4">
+                    <div class="col-md-4 col-sm-12">
                         <div class="price-box">
                             <ul class="pricing-list">
-                                <li class="price-title">50 Units</li>
-                                <li class="price-value">50000 NGN</li>
+                                <li class="price-value">Basic</li>
+                                <li class="price-title">- 5 free conversions per month</li>
+                                <li class="price-title">- Access to free communities</li>
+                                <li class="price-title">- Unlimited access to sports API</li>
+                                <li class="price-title">- Inability to create communities</li>
+                                <li class="price-value">Comming Soon</li>
                                 <li class="price-tag-line"><a href="#">Purchase</a></li>
                             </ul>
                         </div>
-
-
-
                     </div>
-
-                    <!--end col-md-4 -->
-
-
-
                 </div>
-
-                <!--end row -->
-
-
-
             </div>
-
-            <!--end container -->
-
-
-
         </div>
-
-        <!--end pricing-wrapper -->
-
-
-
-    </section> --}}
-
-    <!--end pricing section -->
-
-    <section id="pricing" class="my-5">
+    </section>
+    {{-- <section id="pricing" class="my-5">
 
         <div id="wg-api-football-games"
         data-host="api-football-v1.p.rapidapi.com"
@@ -607,7 +476,7 @@
    
    
 
-    </section>
+    </section> --}}
 
 
     <div class="footer">
