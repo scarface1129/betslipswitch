@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Validator;
 use SebastianBergmann\Comparator\Exception;
+use Lunaweb\RecaptchaV3\Facades\RecaptchaV3;
 
 class MainController extends Controller
 {
@@ -26,10 +27,11 @@ class MainController extends Controller
         return view('index');
     }
     public function conversions() {
-        $conversions = ConversionHistory::where('user_id', Auth::user()->user_id)->get();
         if(!Auth::check()){
             return redirect('/login');
         }
+        $conversions = ConversionHistory::where('user_id', Auth::user()->user_id)->get();
+        
             return view('conversions',['conversions'=>$conversions]);
         }
        public function UpdateProfile(Request $request, $id)
@@ -110,7 +112,7 @@ class MainController extends Controller
     
     public function converter(Request $request) {
         $data = Bookies::all();
-        $api_key='6f9a91afb3msh43eb90b3e4fc735p181969jsn3ba69f5720a8';
+        $api_key=env('FOOTBALL_API');
         // $clientIP = request()->ip();
         // $Ip = $_COOKIE['Ip'] ?? '';
         // $times = $_COOKIE['times'] ?? '0';
@@ -126,6 +128,12 @@ class MainController extends Controller
         //         setcookie('times', $times, time() + (86400 * 365), "/");
         //     }  
         // }
+        if(Auth::user()->plan == null){
+            $user = User::where('id', Auth::user()->id)->first();
+            $user->plan = 'Free';
+            $user->save();
+            
+        }
         if(count($data) > 0){
             $mainData = json_decode($data[0]['plateform'],true);
             $bookies = $mainData['data']['bookies'];
@@ -135,6 +143,16 @@ class MainController extends Controller
         } 
     }
    public function store(Request $request){
+        // runs a check for the remaining free conversion for a user
+        if(Auth::user()->free_conversion < 1){
+            return redirect('converter')->with('no_message','Request not coming from a trusted source');
+        }
+        // goggle recaptcha to prevent attacks on the form
+        $score = RecaptchaV3::verify($request['g-recaptcha-response'],'converter');
+        if($score < 0.5){
+            return redirect('converter')->with('no_message','Request not coming from a trusted source');
+        }
+        //form parameters
         $from = $request['from'];
         $to  = $request['to'];
         $booking_code = $request['betting_token'];
@@ -142,6 +160,7 @@ class MainController extends Controller
         $response = Http::get("http://convertbetcodes.com/api/conversion_v2?from=$from&to=$to&booking_code=$booking_code&api_key=$api_key");
         $data = $response; 
         $data = (json_decode($data));
+        //checks if the api response is null
         if($data == null){
             $this->create_conversion('false',$from,$to,date('Y-m-d H:i:s'),$booking_code);
             return redirect('converter')->with('no_message','Your booking code cound not be converted');
@@ -185,6 +204,10 @@ class MainController extends Controller
         ];
         if($conversion->destination_code){
             $this->create_conversion('true',$from,$to,date('Y-m-d H:i:s'),$booking_code);
+            $user = User::where('id', Auth::user()->id)->first();
+            $user->free_conversion = $user->free_conversion - 1;
+            $user->save();
+            
         }else{
             $this->create_conversion('false',$from,$to,date('Y-m-d H:i:s'),$booking_code);
         }
@@ -192,7 +215,6 @@ class MainController extends Controller
         }catch (Throwable $e) {
             report($e);
             $this->create_conversion('false',$from,$to,date('Y-m-d H:i:s'),$booking_code);
-            
             return redirect('converter')->with('no_message','Your booking code cound not be converted');
         }
         }

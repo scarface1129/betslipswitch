@@ -1,43 +1,27 @@
 <!DOCTYPE html>
-<?php
 
-// die();
-?>
 <html lang="zxx">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="">
     <meta name="description" content="">
+    {!! RecaptchaV3::initJs() !!}
     <title>BetSlipSwitch</title>
 <link rel="shortcut icon" href="/images/ball.png">
-
-
-    <!-- Loading Bootstrap -->
-
     <link href="css/bootstrap2.min.css" rel="stylesheet">
-
     <script src="{{ asset('js/app.js') }}" defer></script>
-
-    <!-- Loading Template CSS -->
-
     <link href="css/style.css" rel="stylesheet">
-
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/master.css" rel="stylesheet">
     {{-- <link href="css/widgets.css" rel="stylesheet"> --}}
-
     <link rel="stylesheet" href="css/pe-icon-7-stroke.css">
-   
-
     <link href="css/style-magnific-popup.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/iofrm-style.css">
     <link rel="stylesheet" type="text/css" href="css/iofrm-theme2.css">
-
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!-- Awsome Fonts -->
-
     <link rel="stylesheet" href="css/all.min.css">
 
     <link  href="css/stylesheet.css" rel="stylesheet">
@@ -136,6 +120,7 @@
                         <ul class="navbar-nav ml-auto">
                             @auth
                             <li class="mt-3"><a href="{{route('conversions')}}">History</a></li>
+                            <li class="mt-3"><a href="#pricing">Plans</a></li>
 
                             @if(Auth::user()->is_admin)
                             <li>
@@ -155,18 +140,22 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <p class="dropdown-item" style="font-size:13px;"><i class="fa fa-envelope"></i>: <?= Auth::user()->email ?? 'No email address'?>
+                                    <p class="dropdown-item" style="font-size:13px;"><i class="fa fa-envelope"></i>: <?= Auth::user()->email ?? 'No email address'?></p>
                                     <p class="dropdown-item" style="font-size:13px;"><i class="fa fa-phone"></i>:  <?= Auth::user()->phone ?? 'No Phone Number'?></p>
+                                    <p class="dropdown-item" style=""><i class="fa fa-calendar-check"></i>:  <?= Auth::user()->plan ?? 'No Active Plan'?> Plan</p>
+                                    <p class="dropdown-item" style=""><i class="fa fa-balance-scale"></i>:  <?= Auth::user()->unit ?? ''?> Units</p>
                                     @if(Auth::user())
-                                    <p class="dropdown-item">
-                                        <a  href="{{ route('logout') }}" style="font-size:13px;" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                            <img style="width: 20px; height: 20px;" src="images/sports/logout.png" alt="Logout"/>: 
-                                            Logout
-                                        </a>
-                                    </p>
-                                    <p data-toggle="modal" data-target="#UpdateProfile" style="cursor: pointer;" class="dropdown-item" style="font-size:13px;"><i class="fa fa-user"></i>:Update Profile </p>
+                                    
+                                    <p data-toggle="modal" data-target="#UpdateProfile" style="cursor: pointer;" class="dropdown-item" style="font-size:13px;"><i class="fa fa-user"></i>:  Update Profile </p>
                                     
                                     <p data-toggle="modal" data-target="#ChangePassword" style="cursor: pointer;" class="dropdown-item" style="font-size:13px;"><i class="fa fa-edit" aria-hidden="true"></i>:  Change Password</p>
+                                    <a  href="{{ route('logout') }}" style="font-size:13px;" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        <p class="dropdown-item">
+                                                <img style="width: 20px; height: 20px;" src="images/sports/logout.png" alt="Logout"/>: 
+                                                Logout
+                                        </p>
+                                     </a>
+
                                     @else
                                     <p class="dropdown-item">
                                         <a  href="{{ route('register') }}" style="font-size:13px;" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -246,10 +235,13 @@
                         @else
                         
                         <div>
-                            <h3>Convert Your Booking Code!</h3><br>
+                            <h3 style="margin-bottom: 13px;">Convert Your Booking Code!</h3>
                             @if(session()->has('no_message'))
                                 <p style='float:left; color:red;'>{{session('no_message') ?? ''}}</p>
+                            @else
+                            <p style="color:green;margin-bottom: 5px;"><?= Auth::user()->free_conversion ?? 'No'?> Free Conversion</p>
                             @endif
+
                             <p style="float:left;">Booking Code Converter</p>
                             {{-- <p style="float:right;" >0 Units</p> --}}
                             <div>
@@ -272,7 +264,13 @@
                                         @endforeach
                                         @endif
                                     </select><br>
+                                    @if(Auth::user()->free_conversion > 0)
+                                    {!! RecaptchaV3::field('converter') !!}
                                     <input value="Convert" style='width:100%;' class="register-submit" type="submit">
+                                    @else
+                                    {{-- <input value="Subscribe" style='width:100%;' class="register-submit" type="submit"> --}}
+                                    <input value="Convert" class="register-submit" type="button" data-toggle="modal" data-target="#subscribe">
+                                    @endif
                                 </form>
                             </div>                            
                         </div>
@@ -349,7 +347,7 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <input id="name" name="name" type="text" placeholder="Name" class="form-control" required="">
+                                        <input id="names" name="name" type="text" placeholder="Name" class="form-control" required="">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
@@ -456,27 +454,57 @@
             </div>
         </div>
     </section>
-    {{-- <section id="pricing" class="my-5">
-
-        <div id="wg-api-football-games"
-        data-host="api-football-v1.p.rapidapi.com"
-        data-key= {{$api_key}}
-        data-date=""
-        data-league="2"
-        data-season="2022"
-        data-theme="dark"
-        data-refresh="15"
-        data-show-toolbar="true"
-        data-show-errors="true"
-        data-show-logos="true"
-        data-modal-game="true"
-        data-modal-standings="true"
-        data-modal-show-logos="true">
+    <section id="" class="my-5 container">
+        {{-- <div id="wg-api-football-games"
+            data-host="api-football-v1.p.rapidapi.com"
+            data-key="{{$api_key}}"
+            data-date=""
+            data-league=""
+            data-season=""
+            data-theme=""
+            data-refresh="60"
+            data-show-toolbar="true"
+            data-show-errors="true"
+            data-show-logos="true"
+            data-modal-game="true"
+            data-modal-standings="true"
+            data-modal-show-logos="true">
         </div>
-   
-   
+        <script
+            type="module"
+            src="https://widgets.api-sports.io/2.0.3/widgets.js">
+        </script> --}}
+        <h2 class="my-5 text-center">Livescores</h2>
+        <div id="wg-api-football-livescore"
+            data-host="api-football-v1.p.rapidapi.com"
+            data-refresh="15"
+            data-key="{{$api_key}}"
+            data-theme="dark"
+            data-show-errors="false"
+            class="api_football_loader">
+        </div>
+       
+        <script
+            type="module"
+            src="https://widgets.api-sports.io/football/1.1.8/widget.js">
+        </script> 
 
-    </section> --}}
+        <div id="wg-api-football-standings"
+            data-host="api-football-v1.p.rapidapi.com"
+            data-key="{{$api_key}}"
+            data-league=""
+            data-team=""
+            data-season="2023"
+            data-theme=""
+            data-show-errors="false"
+            data-show-logos="true"
+            class="wg_loader">
+        </div>
+        <script
+            type="module"
+            src="https://widgets.api-sports.io/2.0.3/widgets.js">
+        </script> 
+    </section>
 
 
     <div class="footer">
@@ -784,6 +812,23 @@
                     </div>
                 </div>
             </div>
+
+            <div id="subscribe" class="modal fade" role="dialog">
+                <div class="vertical-alignment-helper">
+                    <div class="modal-dialog modal-lg vertical-align-center">
+                        <!-- Modal content-->
+                        <div class="modal-content" style="width: 50%">
+                            {{-- <button type="button" style="float: right" class="close" data-dismiss="modal">&times;</button> --}}
+                        <div class="modal-header ">
+                        <h4 class="modal-title">Your allotted free conversions have expired; however, you can still take advantage of the other features offered by the platform. We will be rolling out additional plans in the near future.</h4>                           
+                        </div> 
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" style="font-size: 20px;" data-dismiss="modal">Close</button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
     <!--end footer -->
 
 
@@ -846,37 +891,32 @@
     
     <!--Start of Tawk.to Script-->
 <script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/6374ac47daff0e1306d7ae6a/1ghvs1uk3';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/6374ac47daff0e1306d7ae6a/1ghvs1uk3';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
 </script>
 <!--End of Tawk.to Script-->
 
 <script type="text/javascript">
     
-    function myFunction() {
-  // Get the snackbar DIV
-  var x = document.getElementById("snackbar");
+        function myFunction() {
+    // Get the snackbar DIV
+    var x = document.getElementById("snackbar");
 
-  // Add the "show" class to DIV
-  x.className = "show";
+    // Add the "show" class to DIV
+    x.className = "show";
 
-  // After 3 seconds, remove the show class from DIV
-  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-}
+    // After 3 seconds, remove the show class from DIV
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+    }
 </script>
-{{-- <script
-       type="module"
-       src="https://widgets.api-sports.io/2.0.3/widgets.js">
-</script> --}}
+
+
 </body>
-
-
-
 </html>
