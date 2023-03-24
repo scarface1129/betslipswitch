@@ -15,6 +15,156 @@
 /* ---------------------------------- */
 /* Photo Section 
 ------------------------------------- */
+
+.kode-inner-fixer {
+    background-color: #f2f2f2;
+    border-bottom: 1px solid;
+    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.3);
+    float: left;
+    margin-bottom: 30px;
+    padding: 45px 0;
+    width: 100%;
+}
+.kode-inner-fixer .kode-fixer-counter h2 {
+    color: #ffffff;
+    padding: 15px 10px;
+}
+.kode-fixer-list {
+    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.3);
+    display: table;
+    width: 100%;
+}
+.kode-fixer-list ul {
+    display: table-row;
+}
+.kode-fixer-list ul li {
+    display: table-cell;
+    vertical-align: middle;
+}
+.table-head li {
+    padding: 15px 10px;
+    text-align: center;
+    width: 20%;
+}
+.table-head li:first-child {
+    width: 32%;
+}
+.table-head li h5 {
+    color: #ffffff;
+    margin: 0;
+    text-transform: uppercase;
+}
+.kode-section-title {
+    margin-bottom: 30px;
+    width: 100%;
+    align-self:center;
+}
+.kode-widget-title {
+    float: left;
+    margin-bottom: 18px;
+    width: 100%;
+}
+.kode-section-title h2, .kode-widget-title h2 {
+    border-bottom: 1px solid;
+    display: inline-block;
+    padding: 0 0 7px;
+    text-transform: uppercase;
+}
+.widget-recent-news ul li:hover time {
+    color: #ffffff;
+}
+.kode-section-title.kode-white h2 {
+    border-bottom-color: #fff !important;
+    color: #ffffff !important;
+}
+.kode-white.heading-12 p, .kode-white.heading-12 h2 {
+    color: #fff !important;
+}
+.shape-view .kode-section-title {
+    margin-bottom: 90px;
+}
+.fixer-pagination a {
+    border: 1px solid #ffffff;
+    border-radius: 2px;
+    color: #ffffff;
+    float: right;
+    height: 26px;
+    margin-right: 10px;
+    padding: 4px 0 0;
+    width: 26px;
+}
+.fixer-pagination a:hover {
+    background-color: #ffffff;
+}
+.table-body:nth-child(2n) li {
+    background-color: #333333;
+}
+.table-body:nth-child(2n) li {
+    border-left: 1px solid #404040;
+}
+.table-body li {
+    background-color: #404040;
+    color: #ffffff;
+    padding: 25px 0;
+    text-align: center;
+}
+.list-thumb {
+    color: #ffffff;
+    display: inline-block;
+}
+.list-thumb img {
+    margin-right: 8px;
+}
+.table-body li span {
+    display: inline-block;
+    font-size: 20px;
+    width: 22%;
+}
+.table-body li small {
+    text-transform: uppercase;
+}
+.fixer-btn a {
+    background-color: #ffffff;
+    color: #333333;
+    float: right;
+    font-weight: bold;
+    margin-right: 20px;
+    padding: 3px 14px;
+}
+.table-body li.fixer-btn {
+    width: 26%;
+}
+.fixer-btn a:hover {
+    color: #ffffff;
+}
+.icon-list li {
+    border-bottom: 1px solid #ececec;
+    color: #666666;
+    list-style: outside none none;
+    padding: 3px 0;
+}
+.icon-list li i {
+    margin-right: 10px;
+}
+.kode-team-timeline {
+    float: left;
+    position: relative;
+    width: 100%;
+}
+.kode-team-timeline ul {
+    margin: 0 0 0 -198px;
+    position: relative;
+}
+.kode-team-timeline ul::before {
+    border-left: 1px solid rgba(255, 255, 255, 0.25);
+    content: "";
+    height: 94%;
+    left: 50%;
+    margin: 0 0 0 98px;
+    position: absolute;
+    top: 0;
+    width: 2px;
+}
 .utf-photo-section-block {
 	position: absolute;
     content: '';

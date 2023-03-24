@@ -34,6 +34,14 @@ class MainController extends Controller
         
             return view('conversions',['conversions'=>$conversions]);
         }
+    public function fixtures() {
+        if(!Auth::check()){
+            return redirect('/login');
+        }
+         $api_key=env('FOOTBALL_API');
+        
+            return view('fixtures',['api_key'=>$api_key]);
+        }
        public function UpdateProfile(Request $request, $id)
     
     {

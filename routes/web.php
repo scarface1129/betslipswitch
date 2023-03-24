@@ -47,6 +47,7 @@ Route::get('Unverified', function () {
 
 Route::get('/converter', [MainController::class, 'converter'])->name('converter');
 Route::get('/conversions', [MainController::class, 'conversions'])->name('conversions');
+Route::get('/fixtures', [MainController::class, 'fixtures'])->name('fixtures');
 
 Auth::routes();
 

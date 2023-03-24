@@ -1,5 +1,33 @@
 <!DOCTYPE html>
+{{-- <?php 
+$curl = curl_init();
 
+curl_setopt_array($curl, [
+	CURLOPT_URL => "https://api-football-v1.p.rapidapi.com/v3/fixtures?date=2021-01-29",
+	CURLOPT_RETURNTRANSFER => true,
+	CURLOPT_FOLLOWLOCATION => true,
+	CURLOPT_ENCODING => "",
+	CURLOPT_MAXREDIRS => 10,
+	CURLOPT_TIMEOUT => 30,
+	CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+	CURLOPT_CUSTOMREQUEST => "GET",
+	CURLOPT_HTTPHEADER => [
+		"X-RapidAPI-Host: api-football-v1.p.rapidapi.com",
+		"X-RapidAPI-Key: 6f9a91afb3msh43eb90b3e4fc735p181969jsn3ba69f5720a8"
+	],
+]);
+
+$response = curl_exec($curl);
+$err = curl_error($curl);
+
+curl_close($curl);
+
+if ($err) {
+	echo "cURL Error #:" . $err;
+} else {
+	echo $response;
+}
+?> --}}
 <html lang="zxx">
 <head>
     <meta charset="utf-8">
@@ -8,7 +36,7 @@
     <meta name="description" content="">
     {!! RecaptchaV3::initJs() !!}
     <title>BetSlipSwitch</title>
-<link rel="shortcut icon" href="/images/ball.png">
+    <link rel="shortcut icon" href="/images/ball.png">
     <link href="css/bootstrap2.min.css" rel="stylesheet">
     <script src="{{ asset('js/app.js') }}" defer></script>
     <link href="css/style.css" rel="stylesheet">
@@ -25,7 +53,10 @@
     <link rel="stylesheet" href="css/all.min.css">
 
     <link  href="css/stylesheet.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/api-football.css') }}">
+
     <style>
+      
     @media(min-width: 992px){
         .col-md-6 {
     margin-top: 135px;
@@ -121,6 +152,7 @@
                             @auth
                             <li class="mt-3"><a href="{{route('conversions')}}">History</a></li>
                             <li class="mt-3"><a href="#pricing">Plans</a></li>
+                            <li class="mt-3"><a href="#Fixtures">Livescores</a></li>
 
                             @if(Auth::user()->is_admin)
                             <li>
@@ -136,22 +168,22 @@
 
                             <li class="dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name ?? 'Guest'}}  <i class="fa fa-user fa-1x"></i>
+                                    {{ Auth::user()->name ?? 'Guest'}}  <img style="width: 25px; height: 25px;" src="images/sports/user-account.png" alt="Logout"/>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <p class="dropdown-item" style="font-size:13px;"><i class="fa fa-envelope"></i>: <?= Auth::user()->email ?? 'No email address'?></p>
-                                    <p class="dropdown-item" style="font-size:13px;"><i class="fa fa-phone"></i>:  <?= Auth::user()->phone ?? 'No Phone Number'?></p>
-                                    <p class="dropdown-item" style=""><i class="fa fa-calendar-check"></i>:  <?= Auth::user()->plan ?? 'No Active Plan'?> Plan</p>
-                                    <p class="dropdown-item" style=""><i class="fa fa-balance-scale"></i>:  <?= Auth::user()->unit ?? ''?> Units</p>
+                                    <p class="dropdown-item" style="font-size:13px;"><img style="width: 25px; height: 25px;" src="images/sports/mail.png" alt="Email"/>: <?= Auth::user()->email ?? 'No email address'?></p>
+                                    <p class="dropdown-item" style="font-size:13px;"><img style="width: 25px; height: 25px;" src="images/sports/calling-app.png" alt="Logout"/>:  <?= Auth::user()->phone ?? 'No Phone Number'?></p>
+                                    <p class="dropdown-item" style=""><img style="width: 25px; height: 25px;" src="images/sports/plan.png" alt="Logout"/>:  <?= Auth::user()->plan ?? 'No Active Plan'?> Plan</p>
+                                    <p class="dropdown-item" style=""><img style="width: 25px; height: 25px;" src="images/sports/unit.png" alt="Logout"/>:  <?= Auth::user()->unit ?? ''?> Units</p>
                                     @if(Auth::user())
                                     
-                                    <p data-toggle="modal" data-target="#UpdateProfile" style="cursor: pointer;" class="dropdown-item" style="font-size:13px;"><i class="fa fa-user"></i>:  Update Profile </p>
+                                    <p data-toggle="modal" data-target="#UpdateProfile" style="cursor: pointer;" class="dropdown-item" style="font-size:13px;"><img style="width: 25px; height: 25px;" src="images/sports/check-profile.png" alt="Logout"/>:  Update Profile </p>
                                     
-                                    <p data-toggle="modal" data-target="#ChangePassword" style="cursor: pointer;" class="dropdown-item" style="font-size:13px;"><i class="fa fa-edit" aria-hidden="true"></i>:  Change Password</p>
+                                    <p data-toggle="modal" data-target="#ChangePassword" style="cursor: pointer;" class="dropdown-item" style="font-size:13px;"><img style="width: 25px; height: 25px;" src="images/sports/create-file.png" alt="Logout"/>:  Change Password</p>
                                     <a  href="{{ route('logout') }}" style="font-size:13px;" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                         <p class="dropdown-item">
-                                                <img style="width: 20px; height: 20px;" src="images/sports/logout.png" alt="Logout"/>: 
+                                                <img style="width: 25px; height: 25px;" src="images/sports/logout-arrow.png" alt="Logout"/>: 
                                                 Logout
                                         </p>
                                      </a>
@@ -159,7 +191,7 @@
                                     @else
                                     <p class="dropdown-item">
                                         <a  href="{{ route('register') }}" style="font-size:13px;" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                            <img style="width: 20px; height: 20px;" src="images/sports/logout.png" alt="Register"/>: 
+                                            <img style="width: 25px; height: 25px;" src="images/sports/logout.png" alt="Register"/>: 
                                             Register
                                         </a>
                                     </p>
@@ -454,42 +486,79 @@
             </div>
         </div>
     </section>
-    <section id="" class="my-5 container">
-        {{-- <div id="wg-api-football-games"
-            data-host="api-football-v1.p.rapidapi.com"
-            data-key="{{$api_key}}"
-            data-date=""
-            data-league=""
-            data-season=""
-            data-theme=""
-            data-refresh="60"
-            data-show-toolbar="true"
-            data-show-errors="true"
-            data-show-logos="true"
-            data-modal-game="true"
-            data-modal-standings="true"
-            data-modal-show-logos="true">
-        </div>
-        <script
-            type="module"
-            src="https://widgets.api-sports.io/2.0.3/widgets.js">
-        </script> --}}
+
+
+    <section id="Fixtures" class="my-5 container">
+        {{-- <div class="col-md-12 my-5">
+            <div class="kode-section-title"> <h2>Upcoming Fixtures</h2> </div>
+            <div class="kode-fixer-list">
+              <ul class="table-head thbg-color">
+                <li><h5>Upcoming Match</h5></li>
+                <li> <h5>Date &amp; TIme</h5> </li>
+                <li> <h5>Venue</h5> </li>
+                <li class="fixer-pagination"> <a href="#" class="fa fa-angle-right"></a> <a href="#" class="fa fa-angle-left"></a> </li>
+              </ul>
+              <ul class="table-body">
+                <li>
+                  <a href="#" class="list-thumb"><img src="extra-images/fixer-logo3.png" alt=""> Aresenal</a>
+                  <span>vs</span>
+                  <a href="#" class="list-thumb"><img src="extra-images/fixer-logo4.png" alt=""> FC Bayern</a>
+                </li>
+                <li><small>18/05/2015  14:30 - 16:00</small></li>
+                <li><small>Wembley Stadium</small></li>
+                <li><small>Wembley Stadium</small></li>
+                
+              </ul>
+              <ul class="table-body">
+                <li>
+                  <a href="#" class="list-thumb"><img src="extra-images/fixer-logo3.png" alt=""> Perspiciatis</a>
+                  <span>vs</span>
+                  <a href="#" class="list-thumb"><img src="extra-images/fixer-logo4.png" alt=""> Chelse</a>
+                </li>
+                <li><small>18/05/2015  14:30 - 16:00</small></li>
+                <li><small>Wembley Stadium</small></li>
+                <li><small>Wembley Stadium</small></li>
+                
+              </ul>
+              <ul class="table-body">
+                <li>
+                  <a href="#" class="list-thumb"><img src="extra-images/fixer-logo3.png" alt=""> Aresenal</a>
+                  <span>vs</span>
+                  <a href="#" class="list-thumb"><img src="extra-images/fixer-logo4.png" alt=""> FC Bayern</a>
+                </li>
+                <li><small>18/05/2015  14:30 - 16:00</small></li>
+                <li><small>Wembley Stadium</small></li>
+                <li><small>Wembley Stadium</small></li>
+              
+              </ul>
+              <ul class="table-body">
+                <li>
+                  <a href="#" class="list-thumb"><img src="extra-images/fixer-logo3.png" alt=""> Aresenal</a>
+                  <span>vs</span>
+                  <a href="#" class="list-thumb"><img src="extra-images/fixer-logo4.png" alt=""> FC Bayern</a>
+                </li>
+                <li><small>18/05/2015  14:30 - 16:00</small></li>
+                <li><small>Wembley Stadium</small></li>
+                <li><small>Wembley Stadium</small></li>
+                
+              </ul>
+            </div>
+        </div> --}}
         <h2 class="my-5 text-center">Livescores</h2>
         <div id="wg-api-football-livescore"
             data-host="api-football-v1.p.rapidapi.com"
             data-refresh="15"
             data-key="{{$api_key}}"
-            data-theme="dark"
+            data-theme=""
             data-show-errors="false"
             class="api_football_loader">
         </div>
-       
         <script
             type="module"
             src="https://widgets.api-sports.io/football/1.1.8/widget.js">
         </script> 
 
-        <div id="wg-api-football-standings"
+        <div class="" id="wg-api-football-standings"
             data-host="api-football-v1.p.rapidapi.com"
             data-key="{{$api_key}}"
             data-league=""
@@ -504,6 +573,9 @@
             type="module"
             src="https://widgets.api-sports.io/2.0.3/widgets.js">
         </script> 
+       
+
+       
     </section>
 
 
