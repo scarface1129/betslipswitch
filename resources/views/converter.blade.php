@@ -558,7 +558,7 @@ if ($err) {
             src="https://widgets.api-sports.io/football/1.1.8/widget.js">
         </script> 
 
-        <div class="" id="wg-api-football-standings"
+        {{-- <div class="" id="wg-api-football-standings"
             data-host="api-football-v1.p.rapidapi.com"
             data-key="{{$api_key}}"
             data-league=""
@@ -572,7 +572,7 @@ if ($err) {
         <script
             type="module"
             src="https://widgets.api-sports.io/2.0.3/widgets.js">
-        </script> 
+        </script>  --}}
        
 
        
