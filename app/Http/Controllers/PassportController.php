@@ -5,16 +5,17 @@ namespace App\Http\Controllers;
 use auth;
 use App\Models\User;
 use App\Models\Bookies;
+use App\Models\conversion;
 use Illuminate\Http\Request;
+use App\Models\ConversionHistory;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Laravel\Passport\TokenRepository;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
 use SebastianBergmann\Comparator\Exception;
 use Laravel\Passport\RefreshTokenRepository;
-use App\Models\conversion;
 
 
 class PassportController extends Controller
@@ -438,17 +439,52 @@ class PassportController extends Controller
                 'data' => $arrays
             ], 200);
         }
-          public function conversion()
+        //   public function conversion()
+        // {
+        //     $data = conversion::all();
+        //     $mainData = json_decode($data[0]->conversion,true);
+        //     return response()->json([
+        //         'success' => true,
+        //         'message' => 'Data fetched successfully.',
+        //         'data' => $mainData,
+        //     ], 200);
+        // }
+
+        public function conversions()
         {
-            $data = conversion::all();
-            $mainData = json_decode($data[0]->conversion,true);
+            $data = ConversionHistory::where('user_id', auth()->user()->user_id)->get();
+            $mainData = json_decode($data,true);
             return response()->json([
                 'success' => true,
                 'message' => 'Data fetched successfully.',
                 'data' => $mainData,
             ], 200);
         }
-
+        public function create_conversion(Request $request)
+    {
+        $input = $request->only(['from_code', 'destination_code','booking_code','status']);
+        $conversion = new ConversionHistory();
+        $conversion->user_id = auth()->user()->user_id;
+        $conversion->converted_from = $input['from_code'];
+        $conversion->converted_to = $input['destination_code'];
+        $conversion->code = $input['booking_code'];
+        $conversion->created_at = date('Y-m-d H:i:s');
+        $conversion->updated_at = date('Y-m-d H:i:s');
+        $conversion->status = $input['status'];
+        if($conversion->user_id){
+            $conversion->save();
+            return response()->json([
+                'success' => true,
+                'message' => 'Data Saved successfully.',
+            ], 200);
+        }else{
+            return response()->json([
+                'success' => true,
+                'message' => 'Data Not saved.',
+            ], 200);
+        }
+       
+    }
     /**
      * Logout user.
      *

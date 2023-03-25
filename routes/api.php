@@ -26,9 +26,10 @@ Route::post('verify_code/', [PassportController::class, 'verify_code']);
 Route::post('email_verification/', [PassportController::class, 'email_verification']);
 Route::post('reset_password/', [PassportController::class, 'reset_password']);
 Route::post('resend_code/', [PassportController::class, 'resend_code']);
-Route::get('conversion/', [PassportController::class, 'conversion']);
+// Route::get('conversion/', [PassportController::class, 'conversion']);
 Route::post('bookies', [PassportController::class, 'bookies']);
 Route::post('convert/', [PassportController::class, 'convert']);
+
 
 
 
@@ -39,6 +40,8 @@ Route::middleware('auth:api')->group(function () {
     Route::post('update', [PassportController::class, 'update']);
     Route::post('change_password', [PassportController::class, 'change_password']);
     Route::post('delete_user', [PassportController::class, 'delete']);
+    Route::get('conversion/', [PassportController::class, 'conversions']);
+    Route::post('conversion/', [PassportController::class, 'create_conversion']);
 
     
 

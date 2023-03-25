@@ -227,7 +227,8 @@ class MainController extends Controller
         }
         }
     }
-    public function create_conversion($status,$from,$to,$date,$booking_code){
+    public function create_conversion($status,$from,$to,$date,$booking_code)
+    {
         $conversion = new ConversionHistory();
         $conversion->user_id = Auth::user()->user_id;
         $conversion->converted_from = $from;
