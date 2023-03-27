@@ -4,15 +4,16 @@ namespace App\Http\Controllers;
 
 use Throwable;
 use App\Models\User;
-use App\Models\Bookies;
+use App\Models\plans;
 // use App\Models\conversion;
+use App\Models\Bookies;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\ConversionHistory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Http;
 // use Conversion as GlobalConversion;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Validator;
@@ -142,12 +143,13 @@ class MainController extends Controller
             $user->save();
             
         }
+        $plans = plans::all();
         if(count($data) > 0){
             $mainData = json_decode($data[0]['plateform'],true);
             $bookies = $mainData['data']['bookies'];
-            return view('converter',['bookie'=>$bookies,'api_key'=>$api_key] );
+            return view('converter',['bookie'=>$bookies,'api_key'=>$api_key,'plans'=>$plans] );
         }else{
-            return view('converter', ['bookie'=>''] );
+            return view('converter', ['bookie'=>'','api_key'=>$api_key,'plans'=>$plans] );
         } 
     }
    public function store(Request $request){

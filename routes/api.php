@@ -41,6 +41,7 @@ Route::middleware('auth:api')->group(function () {
     Route::post('change_password', [PassportController::class, 'change_password']);
     Route::post('delete_user', [PassportController::class, 'delete']);
     Route::get('conversion/', [PassportController::class, 'conversions']);
+    Route::get('plans/', [PassportController::class, 'plans']);
     Route::post('conversion/', [PassportController::class, 'create_conversion']);
 
     

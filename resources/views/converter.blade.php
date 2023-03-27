@@ -443,45 +443,33 @@ if ($err) {
         <div class="pricing-wrapper">
             <div class="container">
                 <div class="row">
+                    @foreach($plans as $plan)              
+
                     <div class="col-md-4 col-sm-12">
-                        <div class="price-box">
-                            <ul class="pricing-list">
-                                <li class="price-value">Free</li>
-                                <li class="price-title">- 3 free conversions</li>
-                                <li class="price-title">- Access to free communities</li>
-                                <li class="price-title">- Limited access to sports API</li>
-                                <li class="price-title">- Inability to create communities</li>
-                                <li class="price-value">Active</li>
-                                <li class="price-tag-line"><a href="#">Purchase</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-12">
+                        
+                        @if($plan->id == 2)
                         <div class="price-box grey-price-box">
-                            <ul class="pricing-list">
-                                <li class="price-value">Pro</li>
-                                <li class="price-title">- 10 free conversions per month</li>
-                                <li class="price-title">- Access to free communities</li>
-                                <li class="price-title">- Unlimited access to sports API</li>
-                                <li class="price-title">- Ability to create communities</li>
-                                <li class="price-value">Comming Soon</li>
-                                <li class="price-tag-line"><a href="#">Purchase</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-12">
+                        @else
                         <div class="price-box">
-                            <ul class="pricing-list">
-                                <li class="price-value">Basic</li>
-                                <li class="price-title">- 5 free conversions per month</li>
-                                <li class="price-title">- Access to free communities</li>
-                                <li class="price-title">- Unlimited access to sports API</li>
-                                <li class="price-title">- Inability to create communities</li>
-                                <li class="price-value">Comming Soon</li>
-                                <li class="price-tag-line"><a href="#">Purchase</a></li>
-                            </ul>
+                        @endif 
+                        <ul class="pricing-list">
+                            <li class="price-value">{{$plan->Name}}</li>
+                            <li class="price-title">- {{$plan->No_of_conversion}}</li>
+                            <li class="price-title">- {{$plan->Abilities}}</li>
+                            <li class="price-title">- {{$plan->sports_api}}</li>
+                            <li class="price-title">- {{$plan->communities}}</li>
+                            @if($plan->id == 2 || $plan->id == 3)
+                            <li class="price-value">Coming Soon</li>
+                            @else
+                            <li class="price-value">Active</li>
+                            @endif 
+                            
+                            <li class="price-tag-line"><a href="#">Purchase</a></li>
+                        </ul>
                         </div>
                     </div>
+                    @endforeach
+                    
                 </div>
             </div>
         </div>

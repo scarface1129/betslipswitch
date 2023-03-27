@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use auth;
 use App\Models\User;
+use App\Models\plans;
 use App\Models\Bookies;
 use App\Models\conversion;
 use Illuminate\Http\Request;
@@ -458,6 +459,16 @@ class PassportController extends Controller
                 'success' => true,
                 'message' => 'Data fetched successfully.',
                 'data' => $mainData,
+            ], 200);
+        }
+
+        public function plans()
+        {
+            $plans = plans::all(); 
+            return response()->json([
+                'success' => true,
+                'message' => 'Data fetched successfully.',
+                'data' => $plans,
             ], 200);
         }
         public function create_conversion(Request $request)
