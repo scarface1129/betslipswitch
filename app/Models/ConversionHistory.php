@@ -18,7 +18,8 @@ class ConversionHistory extends Model
         'user_id',
         'converted_from',
         'converted_to',
-        'code',
+        'source_code',
+        'destination_code',
         'status',
     ];
 
