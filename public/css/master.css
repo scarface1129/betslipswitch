@@ -278,7 +278,9 @@ body {
   font-smoothing: antialiased; }
 
 html {
-  overflow-x: hidden; }
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
 
 a {
   color: #f34236; }

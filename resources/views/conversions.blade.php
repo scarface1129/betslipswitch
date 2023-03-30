@@ -200,26 +200,30 @@
 
                             <li class="dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name ?? 'Guest'}}  <i class="fa fa-user fa-1x"></i>
+                                    {{ Auth::user()->name ?? 'Guest'}}  <img style="width: 25px; height: 25px;" src="images/sports/user-account.png" alt="Logout"/>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <p class="dropdown-item" style="font-size:13px;"><i class="fa fa-envelope"></i>: <?= Auth::user()->email ?? 'No email address'?>
-                                    <p class="dropdown-item" style="font-size:13px;"><i class="fa fa-phone"></i>:  <?= Auth::user()->phone ?? 'No Phone Number'?></p>
+                                    <p class="dropdown-item" style="font-size:13px;"><img style="width: 25px; height: 25px;" src="images/sports/mail.png" alt="Email"/>: <?= Auth::user()->email ?? 'No email address'?></p>
+                                    <p class="dropdown-item" style="font-size:13px;"><img style="width: 25px; height: 25px;" src="images/sports/calling-app.png" alt="Logout"/>:  <?= Auth::user()->phone ?? 'No Phone Number'?></p>
+                                    <p class="dropdown-item" style=""><img style="width: 25px; height: 25px;" src="images/sports/plan.png" alt="Logout"/>:  <?= Auth::user()->plan ?? 'No Active Plan'?> Plan</p>
+                                    <p class="dropdown-item" style=""><img style="width: 25px; height: 25px;" src="images/sports/unit.png" alt="Logout"/>:  <?= Auth::user()->unit ?? ''?> Units</p>
                                     @if(Auth::user())
-                                    <p class="dropdown-item">
-                                        <a  href="{{ route('logout') }}" style="font-size:13px;" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                            <img style="width: 20px; height: 20px;" src="images/sports/logout.png" alt="Logout"/>: 
-                                            Logout
-                                        </a>
-                                    </p>
-                                    <p data-toggle="modal" data-target="#UpdateProfile" style="cursor: pointer;" class="dropdown-item" style="font-size:13px;"><i class="fa fa-user"></i>:Update Profile </p>
                                     
-                                    <p data-toggle="modal" data-target="#ChangePassword" style="cursor: pointer;" class="dropdown-item" style="font-size:13px;"><i class="fa fa-edit" aria-hidden="true"></i>:  Change Password</p>
+                                    <p data-toggle="modal" data-target="#UpdateProfile" style="cursor: pointer;" class="dropdown-item" style="font-size:13px;"><img style="width: 25px; height: 25px;" src="images/sports/check-profile.png" alt="Logout"/>:  Update Profile </p>
+                                    
+                                    <p data-toggle="modal" data-target="#ChangePassword" style="cursor: pointer;" class="dropdown-item" style="font-size:13px;"><img style="width: 25px; height: 25px;" src="images/sports/create-file.png" alt="Logout"/>:  Change Password</p>
+                                    <a  href="{{ route('logout') }}" style="font-size:13px;" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        <p class="dropdown-item">
+                                                <img style="width: 25px; height: 25px;" src="images/sports/logout-arrow.png" alt="Logout"/>: 
+                                                Logout
+                                        </p>
+                                     </a>
+
                                     @else
                                     <p class="dropdown-item">
                                         <a  href="{{ route('register') }}" style="font-size:13px;" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                            <img style="width: 20px; height: 20px;" src="images/sports/logout.png" alt="Register"/>: 
+                                            <img style="width: 25px; height: 25px;" src="images/sports/logout.png" alt="Register"/>: 
                                             Register
                                         </a>
                                     </p>
@@ -280,7 +284,8 @@
                         <div class="process" style="text-align: left;">
                             <p style='line-height:10px; font-size: 16px;'>Code From: {{$conversion->converted_from}}</p>
                             <p style='line-height:10px; font-size: 16px;'>Code To: {{$conversion->converted_to}}</p>
-                            <p style='line-height:10px; font-size: 16px;'>Code: {{$conversion->code}}</p>
+                            <p style='line-height:10px; font-size: 16px;'>Source_Code: {{$conversion->source_code}}</p>
+                            <p style='line-height:10px; font-size: 16px;'>Destination_Code: @if($conversion->destination_code == null) Null @else {{$conversion->destination_code}} @endif</p>
                             @if($conversion->status == 'true')
                             <p style='line-height:10px; font-size: 16px; color: blue'>Status: Success</p>
                             @else

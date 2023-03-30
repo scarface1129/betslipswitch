@@ -40,9 +40,9 @@ Route::middleware('auth:api')->group(function () {
     Route::post('update', [PassportController::class, 'update']);
     Route::post('change_password', [PassportController::class, 'change_password']);
     Route::post('delete_user', [PassportController::class, 'delete']);
-    Route::get('conversion/', [PassportController::class, 'conversions']);
+    Route::get('conversation_history/', [PassportController::class, 'conversions']);
     Route::get('plans/', [PassportController::class, 'plans']);
-    Route::post('conversion/', [PassportController::class, 'create_conversion']);
+    Route::post('create_conversion_history/', [PassportController::class, 'create_conversion']);
 
     
 

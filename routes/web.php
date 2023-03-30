@@ -46,6 +46,9 @@ Route::get('Unverified', function () {
 });
 
 Route::get('/converter', [MainController::class, 'converter'])->name('converter');
+// Route::get('/converter', function () {
+//     return view('maintainance');
+// })->name('maintainance');
 Route::get('/conversions', [MainController::class, 'conversions'])->name('conversions');
 Route::get('/fixtures', [MainController::class, 'fixtures'])->name('fixtures');
 

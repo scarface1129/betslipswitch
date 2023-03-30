@@ -24,8 +24,8 @@ class MainController extends Controller
 {
     
    public function index(Request $request) {
-    // $clientIP = request()->ip();   
-        return view('index');
+        $api_key=env('FOOTBALL_API');
+        return view('index',['api_key'=>$api_key]);
     }
     public function conversions() {
         if(!Auth::check()){
@@ -172,7 +172,7 @@ class MainController extends Controller
         $data = (json_decode($data));
         //checks if the api response is null
         if($data == null){
-            $this->create_conversion('false',$from,$to,date('Y-m-d H:i:s'),$booking_code);
+            $this->create_conversion('false',$from,$to,date('Y-m-d H:i:s'),$booking_code, null);
             return redirect('converter')->with('no_message','Your booking code cound not be converted');
         }
         else{
@@ -213,29 +213,30 @@ class MainController extends Controller
         
         ];
         if($conversion->destination_code){
-            $this->create_conversion('true',$from,$to,date('Y-m-d H:i:s'),$booking_code);
+            $this->create_conversion('true',$from,$to,date('Y-m-d H:i:s'),$booking_code, $conversion->destination_code);
             $user = User::where('id', Auth::user()->id)->first();
             $user->free_conversion = $user->free_conversion - 1;
             $user->save();
             
         }else{
-            $this->create_conversion('false',$from,$to,date('Y-m-d H:i:s'),$booking_code);
+            $this->create_conversion('false',$from,$to,date('Y-m-d H:i:s'),$booking_code, null);
         }
         return redirect('converter')->with($info);
         }catch (Throwable $e) {
             report($e);
-            $this->create_conversion('false',$from,$to,date('Y-m-d H:i:s'),$booking_code);
+            $this->create_conversion('false',$from,$to,date('Y-m-d H:i:s'),$booking_code,null);
             return redirect('converter')->with('no_message','Your booking code cound not be converted');
         }
         }
     }
-    public function create_conversion($status,$from,$to,$date,$booking_code)
+    public function create_conversion($status,$from,$to,$date,$booking_code,$destination_code)
     {
         $conversion = new ConversionHistory();
         $conversion->user_id = Auth::user()->user_id;
         $conversion->converted_from = $from;
         $conversion->converted_to = $to;
-        $conversion->code = $booking_code;
+        $conversion->source_code = $booking_code;
+        $conversion->destination_code = $destination_code;
         $conversion->created_at = $date;
         $conversion->updated_at = $date;
         $conversion->status = $status;

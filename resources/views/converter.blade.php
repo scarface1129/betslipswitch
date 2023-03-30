@@ -152,7 +152,7 @@ if ($err) {
                             @auth
                             <li class="mt-3"><a href="{{route('conversions')}}">History</a></li>
                             <li class="mt-3"><a href="#pricing">Plans</a></li>
-                            <li class="mt-3"><a href="#Fixtures">Livescores</a></li>
+                            {{-- <li class="mt-3"><a href="#Fixtures">Livescores</a></li> --}}
 
                             @if(Auth::user()->is_admin)
                             <li>
@@ -476,8 +476,8 @@ if ($err) {
     </section>
 
 
-    <section id="Fixtures" class="my-5 container">
-        {{-- <div class="col-md-12 my-5">
+    {{-- <section id="Fixtures" class="my-5 container">
+        <div class="col-md-12 my-5">
             <div class="kode-section-title"> <h2>Upcoming Fixtures</h2> </div>
             <div class="kode-fixer-list">
               <ul class="table-head thbg-color">
@@ -531,7 +531,7 @@ if ($err) {
                 
               </ul>
             </div>
-        </div> --}}
+        </div>
         <h2 class="my-5 text-center">Livescores</h2>
         <div id="wg-api-football-livescore"
             data-host="api-football-v1.p.rapidapi.com"
@@ -546,7 +546,7 @@ if ($err) {
             src="https://widgets.api-sports.io/football/1.1.8/widget.js">
         </script> 
 
-        {{-- <div class="" id="wg-api-football-standings"
+        <div class="" id="wg-api-football-standings"
             data-host="api-football-v1.p.rapidapi.com"
             data-key="{{$api_key}}"
             data-league=""
@@ -560,11 +560,11 @@ if ($err) {
         <script
             type="module"
             src="https://widgets.api-sports.io/2.0.3/widgets.js">
-        </script>  --}}
+        </script> 
        
 
        
-    </section>
+    </section> --}}
 
 
     <div class="footer">

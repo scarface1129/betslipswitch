@@ -95,7 +95,7 @@
                             <li data-uk-dropdown="{'preventflip':'y'}" aria-haspopup="true" aria-expanded="false"><a href="{{route('privacy_policy')}}">Privacy & Policy</a></li>
                             <li data-uk-dropdown="{'preventflip':'y'}" aria-haspopup="true" aria-expanded="false"><a href="{{route('faq')}}">FAQ</a></li>
                             <li data-uk-dropdown="{'preventflip':'y'}" aria-haspopup="true" aria-expanded="false"><a href="{{route('how_it_works')}}">How-it-works</a></li>
-
+                            <li class="mt-3"><a href="#Fixtures">Livescores</a></li>
                             @if(Auth::user())
                             <li data-uk-dropdown="{'preventflip':'y'}" aria-haspopup="true" aria-expanded="false"><a href="{{ route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
                             @else
@@ -211,7 +211,7 @@
                 </section>
             </div>
         </div>
-        <section class="uk-container uk-container-center" style="margin-top: 10px; margin-bottom:10px;">
+        <section class="uk-container uk-container-center" style="margin-top: 10px; margin-bottom:100px;">
             <div class="col-md-12 mg-y-20 mg-t-50" style="display: ;">
                 <div class="d-sm-flex align-items-center justify-content-between">
                     <div>
@@ -558,6 +558,40 @@
                 
             </div>
         </section>
+        <section id="Fixtures" class="uk-container uk-container-center" style="margin-top: 30px; margin-bottom:30px;">
+        <h2 class="my-5 text-center">Livescores</h2>
+        <div id="wg-api-football-livescore"
+            data-host="api-football-v1.p.rapidapi.com"
+            data-refresh="15"
+            data-key="{{$api_key}}"
+            data-theme=""
+            data-show-errors="false"
+            class="api_football_loader">
+        </div>
+        <script
+            type="module"
+            src="https://widgets.api-sports.io/football/1.1.8/widget.js">
+        </script> 
+
+        {{-- <div class="" id="wg-api-football-standings"
+            data-host="api-football-v1.p.rapidapi.com"
+            data-key="{{$api_key}}"
+            data-league=""
+            data-team=""
+            data-season="2023"
+            data-theme=""
+            data-show-errors="false"
+            data-show-logos="true"
+            class="wg_loader">
+        </div>
+        <script
+            type="module"
+            src="https://widgets.api-sports.io/2.0.3/widgets.js">
+        </script>  --}}
+       
+
+       
+    </section>
         <div class="">
             <div class="container-fluid footer-bottom px-0">
                 <div class="row no-gutters mx-0">
@@ -708,6 +742,7 @@ window.onclick = function(event) {
   }
 }
 </script>
+
 </body>
 
 
